@@ -2,61 +2,69 @@ document.addEventListener("DOMContentLoaded", function() {
     const choices = ["rock", "paper", "scissors"];
     let humanScore = 0;
     let computerScore = 0;
-    let currentRound = 1;
-    const maxRounds = 5;
+    const maxScore = 5;
     
-    function getComputerChoice() {
-        return choices[Math.floor(Math.random() * choices.length)];
-    };
-    
-    function getHumanChoice() {
-        let input = null;
-        
-        while (input == null || !choices.includes(input.toLowerCase())) {
-            input = prompt(`Please choose either 'rock', 'paper' or 'scissors'.`);
-        };
-    
-        return input.toLowerCase();
-    };
-    
-    function playRound(computerChoice, humanChoice) {
-        console.log(`Round ${currentRound} of ${maxRounds}`);
-        console.log(`Player: ${humanChoice}`);
-        console.log(`Computer: ${computerChoice}`);
-        
+    function playRound(humanChoice) {
+        const computerChoice = choices[Math.floor(Math.random() * choices.length)];
+
+        const roundContainer = document.querySelector(".round-container");
+        roundContainer.textContent = "";
+
+        const humanContainer = document.createElement("div");
+        roundContainer.appendChild(humanContainer);
+
+        const humanChoiceHeader = document.createElement("div");
+        humanChoiceHeader.textContent = `Player`;
+        humanContainer.appendChild(humanChoiceHeader);
+
+        const humanChoiceDiv = document.createElement("div");
+        humanChoiceDiv.textContent = humanChoice;
+        humanContainer.appendChild(humanChoiceDiv);
+
+        const computerContainer = document.createElement("div");
+        roundContainer.appendChild(computerContainer);
+
+        const computerChoiceHeader = document.createElement("div");
+        computerChoiceHeader.textContent = `Computer`;
+        computerContainer.appendChild(computerChoiceHeader);
+
+        const computerChoiceDiv = document.createElement("div");
+        computerChoiceDiv.textContent = computerChoice;
+        computerContainer.appendChild(computerChoiceDiv);
+
         if (humanChoice === computerChoice) {
-            console.log(`It's a tie!`);
+            // Logic for tie
         } else if ((humanChoice === "rock" && computerChoice === "scissors") || 
                    (humanChoice === "paper" && computerChoice === "rock") || 
                    (humanChoice === "scissors" && computerChoice === "paper")) {
+
             humanScore += 1;
-            console.log(`You win! ${humanChoice} beats ${computerChoice}.`);
+            const container = document.getElementById("human-score");
+            updateScore(container, humanScore);
         } else {
             computerScore += 1;
-            console.log(`You lose! ${computerChoice} beats ${humanChoice}.`);
+            const container = document.getElementById("computer-score");
+            updateScore(container, computerScore);
         }
-        
-        console.log(`Player score: ${humanScore}`);
-        console.log(`Computer score: ${computerScore}`);
-        console.log(`--------------------`)
     };
 
-    function playGame() {
-        const computerChoice = getComputerChoice();
-        const humanChoice = getHumanChoice();
-        playRound(computerChoice, humanChoice);
+    function updateScore(container, score) {
+        container.textContent = score;
+
+        if (humanScore === maxScore) {
+            console.log("PLAYER WINS")
+        } else if (computerScore === maxScore) {
+            console.log("COMPUTER WINS")
+        }
     };
 
-    while(currentRound <= maxRounds) {
-        playGame();
-        currentRound += 1;
-    };
-    
-    if (humanScore === computerScore) {
-        console.log(`It's a tie!`);
-    } else if (humanScore > computerScore) {
-        console.log(`You win! Congratulations!`);
-    } else {
-        console.log(`You lose! Better luck next time!`);
-    }
+    const humanChoices = document.querySelectorAll(".choices-btn");
+
+    humanChoices.forEach((button) => {
+        button.addEventListener("click", () => {
+            if (humanScore < maxScore && computerScore < maxScore) {
+                playRound(button.id.toLowerCase());
+            };
+        });
+    });
 });

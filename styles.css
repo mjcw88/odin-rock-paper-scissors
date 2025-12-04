@@ -13,10 +13,3 @@ body {
     font-size: 48px;
     margin: 24px;
 }
-
-.bottom-text {
-    display: flex;
-    justify-content: center;
-    font-weight: 300;
-    font-size: 24px;
-}
