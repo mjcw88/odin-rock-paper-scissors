@@ -1,5 +1,6 @@
 document.addEventListener("DOMContentLoaded", function() {
     const choices = ["rock", "paper", "scissors"];
+    const resetBtn = document.querySelector(".reset-button");
     let humanScore = 0;
     let computerScore = 0;
     const maxScore = 5;
@@ -10,51 +11,71 @@ document.addEventListener("DOMContentLoaded", function() {
         const roundContainer = document.querySelector(".round-container");
         roundContainer.textContent = "";
 
-        const humanContainer = document.createElement("div");
-        roundContainer.appendChild(humanContainer);
+        const resultsContainer = document.getElementById("round-result");
+        resultsContainer.textContent = "";
 
-        const humanChoiceHeader = document.createElement("div");
-        humanChoiceHeader.textContent = `Player`;
-        humanContainer.appendChild(humanChoiceHeader);
-
-        const humanChoiceDiv = document.createElement("div");
-        humanChoiceDiv.textContent = humanChoice;
-        humanContainer.appendChild(humanChoiceDiv);
-
-        const computerContainer = document.createElement("div");
-        roundContainer.appendChild(computerContainer);
-
-        const computerChoiceHeader = document.createElement("div");
-        computerChoiceHeader.textContent = `Computer`;
-        computerContainer.appendChild(computerChoiceHeader);
-
-        const computerChoiceDiv = document.createElement("div");
-        computerChoiceDiv.textContent = computerChoice;
-        computerContainer.appendChild(computerChoiceDiv);
+        displayChoice(roundContainer, `Player`, humanChoice);
+        displayChoice(roundContainer, `Computer`, computerChoice,);
 
         if (humanChoice === computerChoice) {
-            // Logic for tie
+            resultsContainer.textContent = "It's a tie!";
         } else if ((humanChoice === "rock" && computerChoice === "scissors") || 
                    (humanChoice === "paper" && computerChoice === "rock") || 
                    (humanChoice === "scissors" && computerChoice === "paper")) {
+            resultsContainer.textContent = `You win! ${capitalizeWord(humanChoice)} beats ${computerChoice}.`        
 
-            humanScore += 1;
             const container = document.getElementById("human-score");
+            humanScore += 1;
             updateScore(container, humanScore);
         } else {
-            computerScore += 1;
+            resultsContainer.textContent = `You lose! ${capitalizeWord(computerChoice)} beats ${humanChoice}.`;
+            
             const container = document.getElementById("computer-score");
+            computerScore += 1;
             updateScore(container, computerScore);
         }
     };
 
+    function displayChoice(container, playerType, choice) {
+        switch(choice) {
+            case "rock":
+                choice = "🪨";
+                break;
+            case "paper":
+                choice = "📃";
+                break;
+            case "scissors":
+                choice = "✂️";
+                break;
+        }
+
+        const playerContainer = document.createElement("div");
+        playerContainer.className = "player-choice";
+        container.appendChild(playerContainer);
+
+        const choiceHeader = document.createElement("div");
+        choiceHeader.textContent = playerType;
+        playerContainer.appendChild(choiceHeader);
+
+        const choiceDiv = document.createElement("div");
+        choiceDiv.textContent = choice;
+        playerContainer.appendChild(choiceDiv);
+    };
+
+    function capitalizeWord(word) {
+        return word.charAt(0).toUpperCase() + word.slice(1);
+    };
+
     function updateScore(container, score) {
+        const finalResultContainer = document.getElementById("final-result");
         container.textContent = score;
 
         if (humanScore === maxScore) {
-            console.log("PLAYER WINS")
+            finalResultContainer.textContent = `You win! Congratulations!`;
+            resetBtn.hidden = false;
         } else if (computerScore === maxScore) {
-            console.log("COMPUTER WINS")
+            finalResultContainer.textContent = `You lose! Better luck next time!`;
+            resetBtn.hidden = false;
         }
     };
 
@@ -66,5 +87,26 @@ document.addEventListener("DOMContentLoaded", function() {
                 playRound(button.id.toLowerCase());
             };
         });
+    });
+
+    resetBtn.addEventListener("click", () => {
+        const humanScoreContainer = document.getElementById("human-score");
+        humanScore = 0;
+        updateScore(humanScoreContainer, humanScore);
+
+        const computerScoreContainer = document.getElementById("computer-score");
+        computerScore = 0;
+        updateScore(computerScoreContainer, computerScore);
+
+        const roundContainer = document.querySelector(".round-container");
+        roundContainer.textContent = "";
+
+        const resultsContainer = document.getElementById("round-result");
+        resultsContainer.textContent = "";
+
+        const finalResultContainer = document.getElementById("final-result");
+        finalResultContainer.textContent = "";
+
+        resetBtn.hidden = true;
     });
 });
