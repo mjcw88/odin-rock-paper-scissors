@@ -1,9 +1,9 @@
 document.addEventListener("DOMContentLoaded", function() {
     const choices = ["rock", "paper", "scissors"];
     const resetBtn = document.querySelector(".reset-button");
+    const maxScore = 5;
     let humanScore = 0;
     let computerScore = 0;
-    const maxScore = 5;
     
     function playRound(humanChoice) {
         const computerChoice = choices[Math.floor(Math.random() * choices.length)];
@@ -58,6 +58,7 @@ document.addEventListener("DOMContentLoaded", function() {
         playerContainer.appendChild(choiceHeader);
 
         const choiceDiv = document.createElement("div");
+        choiceDiv.className = "round-choice";
         choiceDiv.textContent = choice;
         playerContainer.appendChild(choiceDiv);
     };
@@ -72,9 +73,11 @@ document.addEventListener("DOMContentLoaded", function() {
 
         if (humanScore === maxScore) {
             finalResultContainer.textContent = `You win! Congratulations!`;
+            finalResultContainer.hidden = false;
             resetBtn.hidden = false;
         } else if (computerScore === maxScore) {
             finalResultContainer.textContent = `You lose! Better luck next time!`;
+            finalResultContainer.hidden = false;
             resetBtn.hidden = false;
         }
     };
@@ -106,7 +109,8 @@ document.addEventListener("DOMContentLoaded", function() {
 
         const finalResultContainer = document.getElementById("final-result");
         finalResultContainer.textContent = "";
-
+        
+        finalResultContainer.hidden = true;
         resetBtn.hidden = true;
     });
 });

@@ -8,7 +8,7 @@ body {
     display: flex;
     flex-direction: column;
     align-items: center;
-    font-family:Verdana, Geneva, Tahoma, sans-serif
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
 }
 
 .header {
@@ -23,16 +23,19 @@ body {
     font-size: 16px;
 }
 
-.scores-container, .round-container {
+.scores-container,
+.round-container {
     display: flex;
     gap: 16px;
     margin: 24px;
 }
 
-.scores, .player-choice {
+.scores,
+.player-choice,
+#final-result {
     background-color: #1A1A1E;
     padding: 16px;
-    font-family: Arial, Helvetica, sans-serif;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     font-weight: 600;
     min-width: 200px;
     text-align: center;
@@ -42,6 +45,11 @@ body {
 }
 
 .score-number {
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+.score-number,
+.round-choice {
     margin-top: 8px;
     font-size: 40px;
 }
@@ -49,7 +57,6 @@ body {
 .choices-container {
     display: flex;
     gap: 16px;
-    margin: 12px;
 }
 
 .choices-btn {
@@ -68,26 +75,47 @@ body {
     background-color: #2C2C30;
 }
 
-.round-container {
-    display: flex;
+.round-choice {
+    font-size: 100px;
+    margin: 4px 2px;  
 }
 
-.player-choice {
-    min-width: 100px;
-    text-align: center;
+.round-container {
+    display: flex;
+    margin-top: 64px;
 }
 
 .results-container {
     text-align: center;
 }
 
+#round-result {
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+#final-result {
+    margin-top: 36px;
+    text-transform: none;
+    font-size: 20px;
+}
+
 .reset-button {
-    background-color: red;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    text-transform: uppercase;
+    font-size: 20px;
+    font-weight: 600;
+    background-color: #F44336;
     border: none;
     color: #FBFBFB;
-    padding: 10px;
+    padding: 5px 10px;
     text-align: center;
-    font-size: 36px;
-    margin: 4px 2px;
+    border-radius: 8px;
+    margin: 24px;
     cursor: pointer;  
+    box-shadow: 5px 10px 8px #000000;
+}
+
+.reset-button:hover {
+    background-color: #BF352B;
+    color: #EAEAEA;
 }
