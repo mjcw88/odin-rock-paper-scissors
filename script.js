@@ -1,5 +1,6 @@
 document.addEventListener("DOMContentLoaded", function() {
     const choices = ["rock", "paper", "scissors"];
+    const humanChoices = document.querySelectorAll(".choices-btn");
     const resetBtn = document.querySelector(".reset-button");
     const maxScore = 5;
     let humanScore = 0;
@@ -82,17 +83,7 @@ document.addEventListener("DOMContentLoaded", function() {
         }
     };
 
-    const humanChoices = document.querySelectorAll(".choices-btn");
-
-    humanChoices.forEach((button) => {
-        button.addEventListener("click", () => {
-            if (humanScore < maxScore && computerScore < maxScore) {
-                playRound(button.id.toLowerCase());
-            };
-        });
-    });
-
-    resetBtn.addEventListener("click", () => {
+    function resetGame(resetBtn) {
         const humanScoreContainer = document.getElementById("human-score");
         humanScore = 0;
         updateScore(humanScoreContainer, humanScore);
@@ -112,5 +103,17 @@ document.addEventListener("DOMContentLoaded", function() {
         
         finalResultContainer.hidden = true;
         resetBtn.hidden = true;
+    };
+
+    humanChoices.forEach((button) => {
+        button.addEventListener("click", () => {
+            if (humanScore < maxScore && computerScore < maxScore) {
+                playRound(button.id.toLowerCase());
+            };
+        });
+    });
+
+    resetBtn.addEventListener("click", () => {
+        resetGame(resetBtn);
     });
 });

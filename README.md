@@ -1,6 +1,6 @@
 # The Odin Project (Foundations) - Rock, Paper, Scissors
 
-Rock, Paper, Scissors game played against the computer. Click on either of the rock, paper, scissors icon to play a round and the first to score 5 points wins the game.
+Rock, Paper, Scissors game played against the computer. Click on either the rock, paper, scissors icon to play a round and the first to score 5 points wins the game.
 
 ##### Requirements
 
