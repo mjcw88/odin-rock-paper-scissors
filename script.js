@@ -1,3 +1,4 @@
+
 document.addEventListener("DOMContentLoaded", function() {
     const choices = ["rock", "paper", "scissors"];
     const humanChoices = document.querySelectorAll(".choices-btn");
