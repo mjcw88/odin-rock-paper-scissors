@@ -1,4 +1,3 @@
-
 document.addEventListener("DOMContentLoaded", function() {
     const choices = ["rock", "paper", "scissors"];
     const humanChoices = document.querySelectorAll(".choices-btn");
@@ -6,7 +5,7 @@ document.addEventListener("DOMContentLoaded", function() {
     const maxScore = 5;
     let humanScore = 0;
     let computerScore = 0;
-    
+
     function playRound(humanChoice) {
         const computerChoice = choices[Math.floor(Math.random() * choices.length)];
 
@@ -22,8 +21,8 @@ document.addEventListener("DOMContentLoaded", function() {
         if (humanChoice === computerChoice) {
             resultsContainer.textContent = "It's a tie!";
         } else if ((humanChoice === "rock" && computerChoice === "scissors") || 
-                   (humanChoice === "paper" && computerChoice === "rock") || 
-                   (humanChoice === "scissors" && computerChoice === "paper")) {
+                    (humanChoice === "paper" && computerChoice === "rock") || 
+                    (humanChoice === "scissors" && computerChoice === "paper")) {
             resultsContainer.textContent = `You win! ${capitalizeWord(humanChoice)} beats ${computerChoice}.`        
 
             const container = document.getElementById("human-score");
